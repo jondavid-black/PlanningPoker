@@ -1,0 +1,12 @@
+<html>
+    <h1>Planning Poker Teams</h1>
+    {% if teams %}
+        <ul>
+        {% for team in teams %}
+            <li><a href="{% url 'game_list' team.name %}">{{ team.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No teams are available.</p>
+    {% endif %}
+</html>

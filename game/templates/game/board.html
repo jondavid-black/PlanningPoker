@@ -1,0 +1,36 @@
+<html>
+    Game board for {{ game.name }}
+    <br>
+    <br>
+    id: {{ game.id }}
+    <br>
+    name: {{ game.name }}
+    <br>
+    team: {{ game.team }}
+    <br>
+    created_at: {{ game.created_at }}
+    <br>
+    Cards:
+    <ul>
+        {% for card in cards %}
+            <li>{{ card.user }}: {{ card.value }}</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <br>
+    <form action="{% url 'submit_card' game.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <label for="user_name">User Name:</label>
+            <select id="user_name" name="user_name" required>
+                {% for user in users %}
+                    <option value="{{ user.name }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+            <label for="card_value">Card Value:</label>
+            <input type="number" id="card_value" name="card_value" required>
+        </fieldset>
+        <input type="submit" value="submit_card">
+    </form>
+</html>
